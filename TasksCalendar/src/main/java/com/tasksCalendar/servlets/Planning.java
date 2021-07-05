@@ -124,6 +124,10 @@ public class Planning extends HttpServlet {
 			createTask = false;
 		}
 	}
+	
+	private void createAppointment(HttpServletRequest request) {
+		int id_user = (int) request.getSession().getAttribute("id_user");
+	}
 
 	private void sessionVue(HttpServletRequest request) {
 
