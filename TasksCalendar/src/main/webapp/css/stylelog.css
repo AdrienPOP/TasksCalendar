@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+}
+
+/*------------------------
+----------Général---------
+-------------------------- */
+body{
+   background: fixed center no-repeat url("../img/background1.jpg");
+   display: flex;
+   justify-content: center;
+}
+#logo{
+    height: auto;
+    margin-top: 1%;
+}
+#logo img{
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+footer{
+    position: fixed;
+    bottom: 1%;
+}
+footer p{
+    color: white;
+    font-size: 1.5em;
+}
+
+/*------------------------
+---Formulaire connexion---
+-------------------------- */
+#connexion{
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: fixed;
+    bottom: 10%;
+}
+#inscription{
+	background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: fixed;
+    bottom: 25%;
+}
+#inscription label {
+	width: 100%;
+    text-align: center;
+    margin: 2% 0 1% 0;
+    font-size: 1.3em;
+}
+#connexion label{
+    width: 100%;
+    text-align: center;
+    margin: 2% 0 1% 0;
+    font-size: 1.3em;
+}
+#inscription input{
+	width: 100%;
+   	margin: 0 0 2% 0;
+}
+#connexion input{
+    width: 100%;
+    margin: 0 0 2% 0;
+}
+#btn_submit {
+	display : flex;
+	justify-content: center;
+}
+.mdp{
+    display: flex; 
+    justify-content: space-evenly;
+}
+.mdp a{
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 1%;
+}
