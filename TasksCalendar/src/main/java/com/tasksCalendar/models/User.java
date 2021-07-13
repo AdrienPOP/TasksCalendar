@@ -1,5 +1,6 @@
 package com.tasksCalendar.models;
 
+import java.io.PrintStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,12 +37,12 @@ public class User implements Crud {
 	 */
 	public User(int id, String name, String surname, String adress, String phone, String mail) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.adress = adress;
-		this.phone = phone;
-		this.mail = mail;
+		setId(id);
+		setName(name);
+		setSurname(surname);
+		setAdress(adress);
+		setPhone(phone);
+		setMail(mail);
 	}
 	
 	/**
@@ -161,16 +162,24 @@ public class User implements Crud {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String name){
+		if (name == null || !name.matches("[a-zA-Z\\s-']{2,25}")) {
+			throw new RuntimeException();
+		} else {
+			this.name = name;
+		}
 	}
-
+	
 	public String getSurname() {
 		return surname;
 	}
 
 	public void setSurname(String surname) {
-		this.surname = surname;
+		if (surname == null || !surname.matches("[a-zA-Z\\s-']{2,25}")) {
+			throw new RuntimeException();
+		} else {
+			this.surname = surname;
+		}
 	}
 
 	public String getAdress() {
@@ -186,7 +195,11 @@ public class User implements Crud {
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		if (phone == null || !phone.matches("[0-9]{10}")) {
+			throw new RuntimeException();
+		} else {
+			this.phone = phone;
+		}
 	}
 
 	public String getMail() {
@@ -194,7 +207,11 @@ public class User implements Crud {
 	}
 
 	public void setMail(String mail) {
-		this.mail = mail;
+		if (mail == null || !mail.matches("[a-zA-Z0-9-_]{2,30}+@[a-z0-9]{2,30}+.[a-z]{2,10}")) {
+			throw new RuntimeException();
+		} else {
+			this.mail = mail;
+		}
 	}
 
 	public String getPassword() {
@@ -202,7 +219,11 @@ public class User implements Crud {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		if(password == null || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{8,}$")){
+			throw new RuntimeException();
+		} else {
+			this.password = password;
+		}
 	}
 
 	public int getId() {
@@ -218,7 +239,11 @@ public class User implements Crud {
 	}
 
 	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+		if(pseudo == null || !pseudo.matches("[a-zA-Z0-9-]{3,25}")) {
+			throw new RuntimeException();
+		} else {
+			this.pseudo = pseudo;	
+		}
 	}
 
 	// To-String :
