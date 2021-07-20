@@ -33,6 +33,7 @@ public class Planning extends HttpServlet {
 			throws ServletException, IOException {
 		if (request.getSession().getAttribute("id_user") != null
 				&& (int) request.getSession().getAttribute("id_user") != 0) {
+			System.out.println(request.getSession().getAttribute("id_user"));
 			interlayer(request);
 			getLocalDate(request);
 			getDateWeek(request);
@@ -123,10 +124,6 @@ public class Planning extends HttpServlet {
 
 			createTask = false;
 		}
-	}
-	
-	private void createAppointment(HttpServletRequest request) {
-		int id_user = (int) request.getSession().getAttribute("id_user");
 	}
 
 	private void sessionVue(HttpServletRequest request) {

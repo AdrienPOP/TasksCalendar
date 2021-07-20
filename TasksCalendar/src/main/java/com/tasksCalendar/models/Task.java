@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Task implements Crud {
+public class Task implements Crud<Task> {
 
 	private int id;
 	private String title;
@@ -21,13 +21,13 @@ public class Task implements Crud {
 
 	}
 
-	public Task(int id, String title, String description, Date dateTask, int idUser) {
+	public Task(int id, String title, String description, Date dateTask, int idUser, boolean checked) {
 		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.dateTask = dateTask;
-		this.idUser = idUser;
+		setId(id);
+		setTitle(title);
+		setDescription(description);
+		setDateTask(dateTask);
+		setIdUser(idUser);
 	}
 	
 	
@@ -124,7 +124,7 @@ public class Task implements Crud {
 	}
 
 	@Override
-	public HashMap<String, ?> select() {
+	public HashMap<String, Task> select() {
 		HashMap<String, Task> dataTask = new HashMap<>();
 		String query = "SELECT id_tasks, title, description, date_tasks, id_user FROM tasks WHERE id_tasks =?;";
 		try (PreparedStatement prep = DbConnect.getConnector().prepareStatement(query)) {

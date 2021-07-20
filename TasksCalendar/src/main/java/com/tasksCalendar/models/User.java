@@ -1,6 +1,5 @@
 package com.tasksCalendar.models;
 
-import java.io.PrintStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class User implements Crud {
+public class User implements Crud<User> {
 
 	private int id;
 	private String name;
@@ -151,7 +150,7 @@ public class User implements Crud {
 	}
 
 	@Override
-	public ArrayList<?> selectAll() {
+	public ArrayList<User> selectAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -8,7 +8,7 @@ import java.util.HashMap;
  *
  */
 
-public interface Crud {
+public interface Crud <T> {
 	
 	/**
 	 * Insert Object of DB
@@ -20,14 +20,14 @@ public interface Crud {
 	 * Select all line in DB
 	 * @return ArrayList<?> Return list of all by Object in DB
 	 */
-	public ArrayList<?> selectAll();
+	public ArrayList<T> selectAll();
 	
 	
 	/**
 	 * Select one line in DB
 	 * @return HashMap<String, ?> Return hashMap of unique Object in DB
 	 */
-	public HashMap<String, ?> select();
+	public HashMap<String, T> select();
 	
 	
 	/**

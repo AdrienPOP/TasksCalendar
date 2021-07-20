@@ -41,7 +41,6 @@ public class Week {
 		setNext();
 		setPrevious();
 	}
-	
 
 	// Getters and Setters :
 

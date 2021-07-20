@@ -21,39 +21,35 @@
 <title>TasksCalendar - Planning</title>
 </head>
 <body>
-	<section id="baniere-princ" class="col-lg-10">
+	<div id="baniere-princ" class="col-lg-10">
 		<%@ include file="header.jsp"%>
-		<section id="app" class="col-12">
-			<section id="gest_vue" class="col-12 col-lg-4">
+		<div id="app" class="col-12">
+			<div id="gest_vue" class="col-12 col-lg-4">
 				<ul class="col-11">
 					<li class="col-4"><a href="?view=day">Jour</a></li>
 					<li class="col-4"><a href="?view=week">Semaine</a></li>
 					<li class="col-4"><a href="?view=month">Mois</a></li>
 				</ul>
-			</section>
-			<section
+			</div>
+			<div
 				class='col-12 ${ viewUser.equals("month") ? " hidden" : "" }'>
 				<ul id="gest_task" class="col-lg-2">
 					<li><a href="?action=createTask">Créer une nouvelle tâche</a></li>
 				</ul>
-				<ul id="gest_appoint" class="col-lg-2">
-					<li><a href="?action=createAppointment">Créer un nouveau
-							rendez-vous</a></li>
-				</ul>
-
-			</section>
-			<section
+			</div>
+			<div
 				class='col-12 calend ${ viewUser.equals("week") ? "" : " hidden" }'>
 				<!-- Planning  vue semaine-->
 
 				<c:forEach var="day" items="${days}">
 					<article class="art col-10 col-lg-1">
-						<h2>${day.name}</h2>
-						<h3>
-							<fmt:parseDate value="${day.date}" pattern="yyyy-MM-dd"
-								var="parsedDate" type="date" />
-							<fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDate}" />
-						</h3>
+						<div class="art_title">
+							<h2>${day.name}</h2>
+							<h3><fmt:parseDate value="${day.date}" pattern="yyyy-MM-dd"
+									var="parsedDate" type="date" />
+								<fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDate}" />
+							</h3>
+						</div>
 						<c:forEach var="task" items="${day.tasksDay }">
 							<div class="taskDay col-11">
 								<h4>${task.title }</h4>
@@ -63,9 +59,9 @@
 					</article>
 				</c:forEach>
 
-				<aside class="col-lg-3">
+				<aside id="d" class="col-lg-3">
 					<h2>${!createTask ? '' : 'Nouvelle tâche'}</h2>
-					<section class="col-12">
+					<div class="col-12">
 						<form action="Planning" id="select"
 							class="col-lg-10 ${!createTask ? 'hidden' : ''} " method="POST">
 							<div>
@@ -111,27 +107,27 @@
 								</button>
 							</div>
 						</form>
-					</section>
+					</div>
 				</aside>
-				<section class="col-12">
+				<div class="col-12">
 					<div class="col-8 btn_gest_vue">
 						<div class="col-4">
 							<a class="col-2" href="?dateUser=${ week.getPrevious() }">&lt;</a>
 							<a class="col-2" href="?dateUser=${ week.getNext() }">&gt; </a>
 						</div>
 					</div>
-				</section>
-			</section>
-			<section
+				</div>
+			</div>
+			<div
 				class='col-12 calend ${ viewUser.equals("month") ? "" : " hidden" }'>
-				<section class="col-12">
+				<div class="col-12">
 					<div id="gest_vue_month" class="col-12 btn_gest_vue">
 						<div class="col-6">
 							<a class="col-2" href="?dateUser=${ month.getPrevious() }">&lt;</a>
 							<a class="col-2" href="?dateUser=${ month.getNext() }">&gt; </a>
 						</div>
 					</div>
-				</section>
+				</div>
 				<c:forEach var="w" items="${weeks}">
 					<c:forEach var="day" items="${w.daysOfWeek}" varStatus="theCount">
 						<article
@@ -145,9 +141,11 @@
 						</article>
 					</c:forEach>
 				</c:forEach>
-			</section>
-		</section>
+			</div>
+		</div>
 		<%@ include file="footer.jsp"%>
-	</section>
+	</div>
+	<script src="js/script.js"></script>
+	<p></p>
 </body>
 </html>

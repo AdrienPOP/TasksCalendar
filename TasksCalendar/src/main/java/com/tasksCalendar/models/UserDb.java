@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UserDb implements Crud {
+public class UserDb implements Crud <User> {
 	
 	public ArrayList<User> selectAll() {
 		
@@ -43,8 +43,6 @@ public class UserDb implements Crud {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 
 	@Override
 	public void update() {
