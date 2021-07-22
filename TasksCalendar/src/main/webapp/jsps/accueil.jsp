@@ -18,12 +18,12 @@
 <title>TasksCalendar - Accueil</title>
 </head>
 <body>
-	<div id="baniere-princ" class="col-lg-10">
+	<div id="baniere-princ" class="col-lg-11">
 		<%@ include file="header.jsp"%>
 		<div id="app" class="col-12">
-			<section id="tasksDay" class="col-12 col-lg-4">
-				<h1 class="col-12">Bonjour ${ name } !</h1>
-				<article class="art col-10 col-lg-10">
+			<h1 class="col-12">Bonjour ${ surname } !</h1>
+			<section id="tasksHome" class="col-12 col-lg-4">
+				<article class="art_taskHome">
 					<div class="art_title">
 						<h2>${day.getName()}</h2>
 						<h3>

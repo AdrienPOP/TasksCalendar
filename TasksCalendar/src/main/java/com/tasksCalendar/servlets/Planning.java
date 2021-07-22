@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.tasksCalendar.calend.Day;
 import com.tasksCalendar.calend.Month;
 import com.tasksCalendar.calend.Week;
 import com.tasksCalendar.models.Task;
@@ -135,6 +140,6 @@ public class Planning extends HttpServlet {
 		} else if (sessionView.getAttribute("viewUser") != null && request.getParameter("view") != null) {
 			sessionView.setAttribute("viewUser", request.getParameter("view"));
 		}
-	}
-
+	}	
 }
+

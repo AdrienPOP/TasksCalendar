@@ -28,7 +28,7 @@ public class Inscription extends HttpServlet {
 		userCreate.setPhone(request.getParameter("phone"));
 		userCreate.setMail(request.getParameter("mail"));
 		userCreate.setPseudo(request.getParameter("login"));
-		userCreate.setPassword(BCrypt.hashpw(request.getParameter("password"), BCrypt.gensalt()));	
+		userCreate.setPassword(request.getParameter("password"));	
 		userCreate.insert();
 		response.sendRedirect(request.getContextPath() + "/Home");
 	}

@@ -12,8 +12,8 @@ public class DbConnect {
 	private DbConnect() {
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Base_gestionnaire_tache?characterEncoding=utf8", "ad", "test");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/TaskCalendar?characterEncoding=utf8", "ad", "test");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -27,13 +27,17 @@ public class Connexion extends HttpServlet {
 		HttpSession sessionUser = request.getSession(true);
 		String password = request.getParameter("password");
 		sessionUser.setAttribute("id_user", 0);
+		
 		User userLogin = new User();
 		userLogin.setPseudo(request.getParameter("login"));
+		
 		if (userLogin.selectByPseudo()) {
 			if (BCrypt.checkpw(password, userLogin.getPassword())) {
+				
 				userLogin.selectByPseudoFull();
 				sessionUser.setAttribute("id_user", userLogin.getId());
 				sessionUser.setAttribute("name", userLogin.getName());
+				sessionUser.setAttribute("surname", userLogin.getSurname());
 				response.sendRedirect(request.getContextPath() + "/Accueil");
 				return;
 			} else {

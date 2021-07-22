@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-	/**
-	 * 
-	 * @author Adrien POPLIN
-	 *
-	 */
+/**
+ * 
+ * @author Adrien POPLIN
+ *
+ */
 
 public class Month {
 	public static final String[] MONTH = { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout",
@@ -21,13 +21,14 @@ public class Month {
 	private String previous;
 	private String next;
 	private ArrayList<Week> weeksOfMonth = new ArrayList<Week>();
-	
-	/** 
+
+	/**
 	 * return the month at the specified date.
+	 * 
 	 * @param date {@link java.time.LocalDate};
 	 * 
 	 */
-	
+
 	public Month(LocalDate date) {
 		this.date = date;
 		setFirstDayMonth(date);
@@ -40,12 +41,13 @@ public class Month {
 	}
 
 	// Getters and Setters:
-	
+
 	/**
 	 * Sets first day of the month.
+	 * 
 	 * @param date {@link java.time.LocalDate};
 	 */
-	
+
 	private void setFirstDayMonth(LocalDate date) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(Date.valueOf(date));
@@ -61,14 +63,13 @@ public class Month {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(Date.valueOf(date));
 		int nw = calendar.getActualMaximum(Calendar.WEEK_OF_MONTH);
-		
+
 		calendar.setTime(getFirstDayMonth());
 		if (calendar.get(Calendar.DAY_OF_WEEK) == 1 || nw == 4) {
 			this.numberOfWeek = (nw + 1);
-		} else if (calendar.get(Calendar.DAY_OF_WEEK) == 7 && calendar.getActualMaximum(Calendar.DAY_OF_MONTH) == 31){
+		} else if (calendar.get(Calendar.DAY_OF_WEEK) == 7 && calendar.getActualMaximum(Calendar.DAY_OF_MONTH) == 31) {
 			this.numberOfWeek = (nw + 1);
-		}	
-		else {
+		} else {
 			this.numberOfWeek = nw;
 		}
 
@@ -76,6 +77,7 @@ public class Month {
 
 	/**
 	 * Sets ArrayList of Week
+	 * 
 	 * @param date {@link java.time.LocalDate};
 	 */
 	private void setWeeksOfMonth(Date date) {
@@ -83,9 +85,9 @@ public class Month {
 //		calendar.setTime(Date.valueOf(date));
 		calendar.setTime(getFirstDayMonth());
 		LocalDate ld = date.toLocalDate();
-		
+
 		ArrayList<Week> weeks = new ArrayList<Week>();
-		
+
 		if (calendar.get(Calendar.DAY_OF_WEEK) == 1) {
 			for (int i = 0; i < this.numberOfWeek; i++) {
 				weeks.add(new Week(ld.plusWeeks(i)));
@@ -95,14 +97,14 @@ public class Month {
 				weeks.add(new Week(ld.plusWeeks(i)));
 			}
 		}
-		
+
 		this.weeksOfMonth = weeks;
 	}
-	
+
 	/**
 	 * Sets number of month
 	 */
-	
+
 	private void setNumber() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(Date.valueOf(date));
@@ -117,15 +119,15 @@ public class Month {
 	public int getNumberOfWeek() {
 		return numberOfWeek;
 	}
-	
+
 	/**
 	 * 
-	 * @return date {@link java.time.LocalDate} 
+	 * @return date {@link java.time.LocalDate}
 	 */
 	public LocalDate getDate() {
 		return date;
 	}
-	
+
 	/**
 	 * 
 	 * @param date {@link java.time.LocalDate}
@@ -151,7 +153,7 @@ public class Month {
 	}
 
 	/**
-	 * 	Sets date(String) of previous month
+	 * Sets date(String) of previous month
 	 */
 	private void setPrevious() {
 		LocalDate dt = this.date.plusMonths(-1);
@@ -168,7 +170,7 @@ public class Month {
 	}
 
 	/**
-	 * 	Sets date(String) of next month
+	 * Sets date(String) of next month
 	 *
 	 */
 	private void setNext() {
@@ -176,9 +178,11 @@ public class Month {
 		String dateNext = dt.toString();
 		this.next = dateNext;
 	}
+
 	/**
 	 * 
-	 * @return String[] Get names of 12 months [Janvier, Fevrier, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre]
+	 * @return String[] Get names of 12 months [Janvier, Fevrier, Mars, Avril, Mai,
+	 *         Juin, Juillet, Aout, Septembre, Octobre, Novembre, Decembre]
 	 */
 	public static String[] getMonth() {
 		return MONTH;
@@ -191,7 +195,7 @@ public class Month {
 	public Date getFirstDayMonth() {
 		return firstDayMonth;
 	}
-	
+
 	/**
 	 * 
 	 * @return ArrayList<Week> Get Arraylist of weeks in the month
@@ -202,9 +206,8 @@ public class Month {
 
 	@Override
 	public String toString() {
-		return "Month [firstDay=" + firstDayMonth + ", date=" + date + " numero=" + number
-				+ ", numberOfWeek=" + numberOfWeek + ", previous=" + previous + ", next=" + next + ", weeksOfMonth="
-				+ weeksOfMonth + "]";
+		return "Month [firstDay=" + firstDayMonth + ", date=" + date + " numero=" + number + ", numberOfWeek="
+				+ numberOfWeek + ", previous=" + previous + ", next=" + next + ", weeksOfMonth=" + weeksOfMonth + "]";
 	}
 
 }

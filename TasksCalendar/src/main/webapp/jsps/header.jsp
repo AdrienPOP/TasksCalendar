@@ -28,7 +28,9 @@
 		<li class="col-lg-12"><a class=' ${ planning.equals(uri) ? "nav_selection" : ""}' href="Planning">Planning</a></li>
 	</ul>
 	<ul class="col-lg-2">
+		<li class="col-lg-12"><a class=' ${ client.equals(uri) ? "nav_selection" : ""}' href="Customer">Clients</a></li>
+	</ul>
+	<ul class="col-lg-2">
 		<li class="col-lg-12"><a class=' ${ parametre.equals(uri) ? "nav_selection" : ""}' href="Parametre">Paramètres</a></li>
 	</ul>	
 </nav>
-<script src="js/appHeader.js"></script>

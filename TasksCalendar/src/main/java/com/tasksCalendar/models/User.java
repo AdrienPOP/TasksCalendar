@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class User implements Crud<User> {
 
 	private int id;
@@ -69,7 +71,7 @@ public class User implements Crud<User> {
 	 * set id, name and password with data in DB
 	 */
 	public void selectByPseudoFull() {
-		String query = "SELECT id_user, name, pseudo, password FROM users WHERE pseudo = ?; ";
+		String query = "SELECT id_user, name, surname, pseudo, password FROM users WHERE pseudo = ?; ";
 		
 		try(PreparedStatement prep = DbConnect.getConnector().prepareStatement(query)){
 			 prep.setString(1, this.pseudo);
@@ -77,6 +79,7 @@ public class User implements Crud<User> {
 			 while (result.next()) {
 				 this.id = result.getInt("id_user");
 				 this.name = result.getString("name");
+				 this.surname = result.getString("surname");
 				 this.password = result.getString("password");
 				 
 			 }
@@ -221,7 +224,7 @@ public class User implements Crud<User> {
 		if(password == null || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{8,}$")){
 			throw new RuntimeException();
 		} else {
-			this.password = password;
+			this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 		}
 	}
 

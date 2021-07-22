@@ -21,7 +21,7 @@
 <title>TasksCalendar - Planning</title>
 </head>
 <body>
-	<div id="baniere-princ" class="col-lg-10">
+	<div id="baniere-princ" class="col-lg-11">
 		<%@ include file="header.jsp"%>
 		<div id="app" class="col-12">
 			<div id="gest_vue" class="col-12 col-lg-4">
@@ -40,27 +40,35 @@
 			<div
 				class='col-12 calend ${ viewUser.equals("week") ? "" : " hidden" }'>
 				<!-- Planning  vue semaine-->
-
-				<c:forEach var="day" items="${days}">
-					<article class="art col-10 col-lg-1">
-						<div class="art_title">
-							<h2>${day.name}</h2>
-							<h3><fmt:parseDate value="${day.date}" pattern="yyyy-MM-dd"
-									var="parsedDate" type="date" />
-								<fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDate}" />
-							</h3>
-						</div>
-						<c:forEach var="task" items="${day.tasksDay }">
-							<div class="taskDay col-11">
-								<h4>${task.title }</h4>
-								<p class="tooltip">${task.description }</p>
+				<div class="col-lg-8 week">
+					<c:forEach var="day" items="${days}">
+						<article class="art col-10">
+							<div class="art_title">
+								<h2>${day.name}</h2>
+								<h3><fmt:parseDate value="${day.date}" pattern="yyyy-MM-dd"
+										var="parsedDate" type="date" />
+									<fmt:formatDate pattern="dd/MM/yyyy" value="${parsedDate}" />
+								</h3>
 							</div>
-						</c:forEach>
-					</article>
-				</c:forEach>
-
-				<aside id="d" class="col-lg-3">
-					<h2>${!createTask ? '' : 'Nouvelle tâche'}</h2>
+							<c:forEach var="task" items="${day.tasksDay }">
+								<div class="taskDay col-11">
+									<h4>${task.title }</h4>
+									<p class="tooltip">${task.description }</p>
+								</div>
+							</c:forEach>
+						</article>
+					</c:forEach>
+					<div class="col-12">
+						<div class="col-11 btn_gest_vue">
+							<div class="col-4">
+								<a class="col-2" href="?dateUser=${ week.getPrevious() }">&lt;</a>
+								<a class="col-2" href="?dateUser=${ week.getNext() }">&gt; </a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<aside id="d" class="">
+					<h2 class="${!createTask ? '' : 'art_title'}">${!createTask ? '' : 'Nouvelle tâche'}</h2>
 					<div class="col-12">
 						<form action="Planning" id="select"
 							class="col-lg-10 ${!createTask ? 'hidden' : ''} " method="POST">
@@ -73,28 +81,16 @@
 									id="date_task" name="date_task" class="col-lg-12"
 									value="${ date }">
 							</div>
-							<!-- 	<div>
-								<label for="timetable">Horraire</label> 
-								<select name="timetable" id="timetable" class="col-lg-12">
-									<option value=""> Choisissez l'horraire</option>
-									<option value=""> 6h</option>
-									<option value=""> 7h</option>
-									<option value=""> 8h</option>
-									<option value=""> 9h</option>
-									<option value=""> 10h</option>
-									<option value=""> 11h</option>
-									<option value=""> 12h</option>	
-									<option value=""> 13h</option>
-									<option value=""> 14h</option>
-									<option value=""> 15h</option>
-									<option value=""> 16h</option>
-									<option value=""> 17h</option>
-									<option value=""> 18h</option>
-									<option value=""> 19h</option>
-									<option value=""> 20h</option>
-									<option value=""> 21h</option>
-								</select>
-							</div> -->
+							<div>
+								<label for="time_task">Heure</label> <input type="time"
+									id="time_task" name="time_task" class="col-lg-12"
+									value="${ date }">
+							</div>
+							<div>
+								<label for="customer_task">Client</label> 
+								<input
+									type="search" id="customer_task" name="customer_task" class="col-lg-12">
+							</div>
 							<div>
 								<label for="description_task">Description</label>
 								<textarea name="description_task" id="description_task"
@@ -109,14 +105,6 @@
 						</form>
 					</div>
 				</aside>
-				<div class="col-12">
-					<div class="col-8 btn_gest_vue">
-						<div class="col-4">
-							<a class="col-2" href="?dateUser=${ week.getPrevious() }">&lt;</a>
-							<a class="col-2" href="?dateUser=${ week.getNext() }">&gt; </a>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div
 				class='col-12 calend ${ viewUser.equals("month") ? "" : " hidden" }'>

@@ -33,17 +33,17 @@ public class Task implements Crud<Task> {
 	
 	public static ArrayList<Task> selectTaskUserByDay(int idUserbyUser, Date date){
 		ArrayList<Task> dataTasks = new ArrayList<>();
-		String query = "Select id_tasks, title, description, date_tasks FROM tasks WHERE id_user = ? AND date_tasks = ?;";
+		String query = "Select id_task, title, description, date_task FROM tasks WHERE id_user = ? AND date_task = ?;";
 		try (PreparedStatement prep = DbConnect.getConnector().prepareStatement(query)){
 			prep.setInt(1, idUserbyUser);
 			prep.setDate(2, date);
 			ResultSet result = prep.executeQuery();
 			while (result.next()) {
 				Task t = new Task();
-				t.setId(result.getInt("id_tasks"));
+				t.setId(result.getInt("id_task"));
 				t.setTitle(result.getString("title"));
 				t.setDescription(result.getString("description"));
-				t.setDateTask(result.getDate("date_tasks"));
+				t.setDateTask(result.getDate("date_task"));
 				dataTasks.add(t);
 			}
 			DbConnect.getConnector().close();
@@ -55,16 +55,16 @@ public class Task implements Crud<Task> {
 	
 	public ArrayList<Task> selectTaskByUser(){
 		ArrayList<Task> dataTasks = new ArrayList<>();
-		String query = "Select id_tasks, title, description, date_tasks, id_user FROM tasks WHERE id_user = ?;";
+		String query = "Select id_task, title, description, date_task, id_user FROM tasks WHERE id_user = ?;";
 		try (PreparedStatement prep = DbConnect.getConnector().prepareStatement(query)){
 			prep.setInt(1, this.idUser);
 			ResultSet result = prep.executeQuery();
 			while (result.next()) {
 				Task t = new Task();
-				t.setId(result.getInt("id_tasks"));
+				t.setId(result.getInt("id_task"));
 				t.setTitle(result.getString("title"));
 				t.setDescription(result.getString("description"));
-				t.setDateTask(result.getDate("date_tasks"));
+				t.setDateTask(result.getDate("date_task"));
 				t.setIdUser(result.getInt("id_user"));
 				dataTasks.add(t);
 			}
@@ -80,7 +80,7 @@ public class Task implements Crud<Task> {
 
 	@Override
 	public void insert() {
-		String query = "INSERT INTO tasks (title, description, date_tasks, id_user) VALUES(?, ?, ?, ?);";
+		String query = "INSERT INTO tasks (title, description, date_task, id_user) VALUES(?, ?, ?, ?);";
 		try (PreparedStatement prep = DbConnect.getConnector().prepareStatement(query,
 				Statement.RETURN_GENERATED_KEYS)) {
 
@@ -104,15 +104,15 @@ public class Task implements Crud<Task> {
 	@Override
 	public ArrayList<Task> selectAll() {
 		ArrayList<Task> dataTasks = new ArrayList<>();
-		String query = "Select id_tasks, title, description, date_tasks, id_user FROM tasks;";
+		String query = "Select id_task, title, description, date_task, id_user FROM tasks;";
 		try (PreparedStatement prep = DbConnect.getConnector().prepareStatement(query)){
 			ResultSet result = prep.executeQuery();
 			while (result.next()) {
 				Task t = new Task();
-				t.setId(result.getInt("id_tasks"));
+				t.setId(result.getInt("id_task"));
 				t.setTitle(result.getString("title"));
 				t.setDescription(result.getString("description"));
-				t.setDateTask(result.getDate("date_tasks"));
+				t.setDateTask(result.getDate("date_task"));
 				t.setIdUser(result.getInt("id_user"));
 				dataTasks.add(t);
 			}
@@ -126,7 +126,7 @@ public class Task implements Crud<Task> {
 	@Override
 	public HashMap<String, Task> select() {
 		HashMap<String, Task> dataTask = new HashMap<>();
-		String query = "SELECT id_tasks, title, description, date_tasks, id_user FROM tasks WHERE id_tasks =?;";
+		String query = "SELECT id_task, title, description, date_task, id_user FROM tasks WHERE id_task =?;";
 		try (PreparedStatement prep = DbConnect.getConnector().prepareStatement(query)) {
 
 			prep.setInt(1, this.id);
@@ -134,10 +134,10 @@ public class Task implements Crud<Task> {
 			ResultSet result = prep.executeQuery();
 			while (result.next()) {
 				Task t = new Task();
-				t.setId(result.getInt("id_tasks"));
+				t.setId(result.getInt("id_task"));
 				t.setTitle(result.getString("title"));
 				t.setDescription(result.getString("description"));
-				t.setDateTask(result.getDate("date_tasks"));
+				t.setDateTask(result.getDate("date_task"));
 				t.setIdUser(result.getInt("id_user"));
 				dataTask.put("t", t);
 			}
@@ -156,12 +156,22 @@ public class Task implements Crud<Task> {
 
 	@Override
 	public void delete() {
-		// TODO Auto-generated method stub
 
+		String query = "DELETE t FROM tasks t JOIN users u ON t.id_user = u.id_user WHERE t.id_task = ? AND u.id_user = ?;";
+
+		try (PreparedStatement prep = DbConnect.getConnector().prepareStatement(query)) {
+			prep.setInt(1, this.id);
+			prep.setInt(2, this.idUser);
+			prep.executeUpdate();
+
+			DbConnect.getConnector().close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Getters and Setters
-
+	
 	public int getId() {
 		return id;
 	}
