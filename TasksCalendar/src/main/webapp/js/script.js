@@ -44,17 +44,17 @@ let printDay = (jsonString) => {
 
 	let day = JSON.parse(jsonString);
 
-	let html = "<div class='art_title'>";
+	let html = "<div class='daySelect'><div class='art_title'>";
 	html += "<h2>" + day.name + "</h2>";
 	html += "<h3>" + data + "</h3></div>";
 
 	for (let t of day.tasksDay) {
 		let id = t.id;
-		html += "<div class='col-11 taskDay'><div class=''><h4>" + t.title + "<h4> </div>"
-		html += "<p>" + t.description + "</p>"
-		html += "<a class='de' href='#delete&id=" + id + "'>Delete</button> </a></div>"
+		html += "<div class='col-11 taskDay'><div class=''><h4>" + t.title + "<h4> </div>";
+		html += "<p>" + t.description + "</p>";
+		html += "<a class='de' href='#delete&id=" + id + "'>Delete</button> </a></div>";
 	}
-	html += "<a href=Planning>Modifications terminées</a>"
+	html += "<a href='?action=createTask&date="+ data.split("/").reverse().join("-") +"'>Créer une tâche</a><a href='Planning'>Modifications terminées</a></div>";
 	document.getElementById("d").innerHTML = html;
 	btn = document.getElementsByClassName("de");
 

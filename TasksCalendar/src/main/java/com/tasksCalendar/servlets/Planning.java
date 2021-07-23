@@ -38,11 +38,10 @@ public class Planning extends HttpServlet {
 			throws ServletException, IOException {
 		if (request.getSession().getAttribute("id_user") != null
 				&& (int) request.getSession().getAttribute("id_user") != 0) {
-			System.out.println(request.getSession().getAttribute("id_user"));
 			interlayer(request);
-			getLocalDate(request);
 			getDateWeek(request);
 			ifCreateTask(request);
+			getLocalDate(request);
 			getDateMonth(request);
 			sessionVue(request);
 			this.getServletContext().getRequestDispatcher("/jsps/planning.jsp").forward(request, response);
@@ -112,6 +111,9 @@ public class Planning extends HttpServlet {
 		if (request.getParameter("action") != null && request.getParameter("action").equals("createTask")) {
 			createTask = true;
 			request.setAttribute("createTask", createTask);
+			if(request.getParameter("date") != null) {
+				date = LocalDate.parse(request.getParameter("date"));
+			}
 		}
 	}
 
